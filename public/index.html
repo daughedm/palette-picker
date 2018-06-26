@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/animate.css">
   <link rel="stylesheet" href="css/normalize.css">
@@ -44,16 +44,18 @@
     </div>
   </div>
   <section class="palette-creator">
-    <form>
-      <select>
+    <form class="palette-form">
+      <select class="palette-dropdown">
         <option value="untitled">untitled project</option>
         <!-- more projects will be added -->
       </select>
-      <input type="text"/>
-      <input type="submit" value="Save Palette">
+      <div class ="input-wrapper">
+        <input class="palette-name" placeholder="palette name" type="text"/>
+        <button class="button palette-btn">Save Palette</button>
+      </div>
     </form>
   </section>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/scripts.js"></script>
 </body>
 
