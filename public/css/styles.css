@@ -20,6 +20,7 @@ body {
   border-bottom: 1.5px solid rgb(236, 236, 236);
   position: fixed;
   width: 100%;
+  z-index: 5;
 }
 
 .color-palette {
@@ -77,4 +78,37 @@ body {
   color: #333333;
   font-size: 1rem;
   border: 1px solid rgb(236, 236, 236)
+}
+
+.button-wrapper {
+  width: 80%;
+  margin: 30px auto;
+}
+
+.generate-btn {
+  display: block;
+  margin: auto;
+}
+
+.button {
+  background-color: white;
+  border: 2px solid #AC92EB;
+  color: #AC92EB;
+  height: 40px;
+  border-radius: 5px;
+  padding: 0 15px;
+  box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button:hover {
+  background-color: #AC92EB;
+  color: white;
+}
+
+.palette-creator {
+  background-color: white;
+  border-bottom: 1.5px solid rgb(236, 236, 236);
+  border-top: 1.5px solid rgb(236, 236, 236);
+  height: 500px;
+  width: 100%;
 }
