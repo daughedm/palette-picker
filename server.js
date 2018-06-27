@@ -1,14 +1,19 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
+const express = require('express') //imports express
+const app = express() //creates an instance of express
+const bodyParser = require('body-parser') //not sure yet
+const environment = process.env.NODE_ENV || 'development' //sets environment to specified, defaults to dev
+const configuration = require('./knexfile')[environment] //grabs correct knexfile
+const database = require('knex')(configuration)
 
 app.use(express.static('public'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.set('port', process.env.PORT || 3000);
-app.locals.title = 'Chat Box';
+app.set('port', process.env.PORT || 3000); //creates port at localhost 3000
+
+app.locals.projects = 'Chat Box';
+
 app.locals.messages = [
   { id: 'a1', message: 'Hello World' },
   { id: 'b2', message: 'Goodbye World' }
