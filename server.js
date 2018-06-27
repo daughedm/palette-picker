@@ -47,16 +47,6 @@ app.get('/api/v1/palettes', (request, response) => {
     });
 });
 
-// app.get('/api/v1/palettes/:id', (request, response) => {
-//   const { id } = request.params;
-//   const message = app.locals.messages.find(message => message.id === id);
-//   if (message) {
-//     return response.status(200).json(message);
-//   } else {
-//     return response.sendStatus(404);
-//   }
-// });
-
 app.get('/api/v1/projects/:id/palettes', (request, response) => {
   const { id } = request.params
 
@@ -65,7 +55,7 @@ app.get('/api/v1/projects/:id/palettes', (request, response) => {
     .then(palettes => {
       if (!palettes.length) {
         return response.status(404).json({
-          error: 'Sorry, no palettes with id of ${ id } could be found'
+          error: 'Sorry, no palettes could be found'
         })
       }
       response.status(200).json(palettes)

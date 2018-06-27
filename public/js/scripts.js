@@ -18,13 +18,13 @@ const colorGenerator = () => {
 
 $(document).ready(function () {
   var toggle = 0;
-  $("div .color").click(function () {
+  $(".lock").click(function () {
     if (toggle == 0) {
-      $(".lock").attr("src", "assets/locked.svg");
+      $(this).attr("src", "assets/locked.svg");
       toggle = 1;
     }
     else if (toggle == 1) {
-      $(".lock").attr("src", "assets/unlocked.svg");
+      $(this).attr("src", "assets/unlocked.svg");
       toggle = 0;
     }
   });
