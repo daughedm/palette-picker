@@ -67,7 +67,31 @@ app.get('/api/v1/projects/:id/palettes', (request, response) => {
 
 // posts
 
+app.post('/api/v1/projects', (request, response) => {
+  const {project} = request.body
+  database('projects').insert(project, 'id')
+    .then((projectId) => {
+      response.status(201).json({projectId: projectId[0]});
+    })
+    .catch((error) => {
+      response.status(500).json({
+        error
+      });
+    });
+});
 
+app.post('/api/v1/palettes', (request, response) => {
+  const palette = request.body;
+  
+    if(!palette.name) {
+      return response.status(422).send({ 
+        error: `Expected format: { name: <String>, colorOne: <String> , colorTwo: <String>, colorThree: <String>, colorFour: <String>, colorFive: <String>, project_id: <Number> }.`
+      });
+  };
+  database('palettes').insert(palette, 'id')
+    .then(palettes => response.status(201).json({ id: palettes[0] }))
+    .catch(error => response.status(500).json({ error }));
+});
 
 
 app.listen(app.get('port'), () => {
