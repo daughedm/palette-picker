@@ -5,26 +5,32 @@ const environment = process.env.NODE_ENV || 'development' //not sure
 const configuration = require('./knexfile')[environment] //grabs correct knexfile
 const database = require('knex')(configuration)
 
+const useHttps = (request, response, next) => {
+  if (request.headers['x-forwarded-proto'] !== 'https') {
+    response.redirect('https://' + request.get('host') + request.url);
+  }
+  next();
+};
+
 app.use(express.static('public'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+if (process.env.NODE_ENV === 'production') {
+  app.use(useHttps);
+}
 
 
 app.set('port', process.env.PORT || 3000); //creates port at localhost 3000
 
-app.locals.projects = 'Chat Box';
-
-app.locals.messages = [
-  { id: 'a1', message: 'Hello World' },
-  { id: 'b2', message: 'Goodbye World' }
-];
+app.locals.title = 'Palette Picker';
 
 app.get('/', (request, response) => {
   response.send('Hello World!');
 });
 
 app.get('/api/v1/projects', (request, response) => {
-  database('projects').select()
+  database('projects')
+    .select()
     .then((projects) => {
       response.status(200).json(projects);
     })
@@ -34,6 +40,22 @@ app.get('/api/v1/projects', (request, response) => {
       });
     });
 });
+
+app.get('/api/v1/palettes', (request, response) => {
+  database('palettes')
+    .select()
+    .then((palette) => {
+      response.status(200).json(palette);
+    })
+    .catch((error) => {
+      response.status(500).json({
+        error
+      });
+    });
+});
+
+
+
 
 app.get('/api/v1/messages/:id', (request, response) => {
   const { id } = request.params;
