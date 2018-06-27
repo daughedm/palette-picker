@@ -146,3 +146,17 @@ body {
   width: 50%;
   margin: auto;
 }
+
+.locked-icon {
+  background-image: url('../assets/locked.svg');
+  width: 30px;
+  margin: 10px 0 0 10px;
+  cursor: pointer;
+}
+
+.unlocked-icon {
+  background-image: url('../assets/unlocked.svg');
+  width: 30px;
+  margin: 10px 0 0 10px;
+  cursor: pointer;
+}
