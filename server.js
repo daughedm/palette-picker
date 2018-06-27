@@ -20,14 +20,11 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
-app.set('port', process.env.PORT || 3000); //creates port at localhost 3000
+app.set('port', process.env.PORT || 3000);
 
-app.locals.title = 'Palette Picker';
+app.locals.title = 'Palette-Picker';
 
-app.get('/', (request, response) => {
-  response.send('Hello World!');
-});
-
+// gets
 app.get('/api/v1/projects', (request, response) => {
   database('projects')
     .select()
@@ -35,9 +32,7 @@ app.get('/api/v1/projects', (request, response) => {
       response.status(200).json(projects);
     })
     .catch((error) => {
-      response.status(500).json({
-        error
-      });
+      response.status(500).json({ error });
     });
 });
 
@@ -48,46 +43,45 @@ app.get('/api/v1/palettes', (request, response) => {
       response.status(200).json(palette);
     })
     .catch((error) => {
-      response.status(500).json({
-        error
-      });
+      response.status(500).json({ error });
     });
 });
 
+// app.get('/api/v1/palettes/:id', (request, response) => {
+//   const { id } = request.params;
+//   const message = app.locals.messages.find(message => message.id === id);
+//   if (message) {
+//     return response.status(200).json(message);
+//   } else {
+//     return response.sendStatus(404);
+//   }
+// });
 
+app.get('/api/v1/projects/:id/palettes', (request, response) => {
+  const { id } = request.params
 
-
-app.get('/api/v1/messages/:id', (request, response) => {
-  const { id } = request.params;
-  const message = app.locals.messages.find(message => message.id === id);
-  if (message) {
-    return response.status(200).json(message);
-  } else {
-    return response.sendStatus(404);
-  }
-});
-
-app.post('/api/v1/messages', (request, response) => {
-  const { message } = request.body;
-  const id = Date.now();
-
-  if (!message) {
-    return response.status(422).send({
-      error: 'No message property provided'
-    });
-  } else {
-    app.locals.messages.push({ id, message });
-    return response.status(201).json({ id, message });
-  }
+  database('palettes').where("project_id", id)
+    .select()
+    .then(palettes => {
+      if (!palettes.length) {
+        return response.status(404).json({
+          error: 'Sorry, no palettes with id of ${ id } could be found'
+        })
+      }
+      response.status(200).json(palettes)
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    })
 })
 
-// app.delete('/api/v1/messages/:id', (request, response) {
-//   const { id } = request.params;
-//   response.send('DELETE request to homepage');
-// });
+// posts
+
+
+
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
 
-app.use(express.static('public'));
+module.exports = app;
