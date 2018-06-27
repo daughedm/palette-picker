@@ -1,7 +1,7 @@
 const express = require('express') //imports express
 const app = express() //creates an instance of express
 const bodyParser = require('body-parser') //not sure yet
-const environment = process.env.NODE_ENV || 'development' //sets environment to specified, defaults to dev
+const environment = process.env.NODE_ENV || 'development' //not sure
 const configuration = require('./knexfile')[environment] //grabs correct knexfile
 const database = require('knex')(configuration)
 
@@ -23,10 +23,16 @@ app.get('/', (request, response) => {
   response.send('Hello World!');
 });
 
-app.get('/api/v1/messages', (request, response) => {
-  const messages = app.locals.messages;
-
-  response.json({ messages });
+app.get('/api/v1/projects', (request, response) => {
+  database('projects').select()
+    .then((projects) => {
+      response.status(200).json(projects);
+    })
+    .catch((error) => {
+      response.status(500).json({
+        error
+      });
+    });
 });
 
 app.get('/api/v1/messages/:id', (request, response) => {
