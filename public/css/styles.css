@@ -59,6 +59,7 @@ body {
 .lock {
   width: 30px;
   margin: 10px 0 0 10px;
+  cursor: pointer;
 }
 
 .logo {
@@ -95,8 +96,8 @@ body {
   border: 2px solid #AC92EB;
   color: #AC92EB;
   height: 40px;
-  border-radius: 5px;
-  padding: 0 15px;
+  border-radius: 4px;
+  padding: 0 20px;
   box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -109,6 +110,53 @@ body {
   background-color: white;
   border-bottom: 1.5px solid rgb(236, 236, 236);
   border-top: 1.5px solid rgb(236, 236, 236);
-  height: 500px;
+  height: 180px;
   width: 100%;
+}
+
+.palette-name {
+  height: 40px;
+  padding: 0 0 0 10px;
+  width: 65%;
+}
+
+.palette-btn {
+  width: 34%;
+  float: right;
+}
+
+.palette-dropdown {
+  height: 40px;
+  background-color: white;
+  border: 2px solid #AC92EB;
+  color: #AC92EB;
+  padding: 0 15px;
+  display: block;
+  width: 50%;
+  margin: 30px auto;
+  cursor: pointer;
+}
+
+.palette-form {
+  margin: auto;
+  width: 80%;
+}
+
+.input-wrapper {
+  width: 50%;
+  margin: auto;
+}
+
+.locked-icon {
+  background-image: url('../assets/locked.svg');
+  width: 30px;
+  margin: 10px 0 0 10px;
+  cursor: pointer;
+}
+
+.unlocked-icon {
+  background-image: url('../assets/unlocked.svg');
+  width: 30px;
+  margin: 10px 0 0 10px;
+  cursor: pointer;
 }

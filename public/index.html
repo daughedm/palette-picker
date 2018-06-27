@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/animate.css">
   <link rel="stylesheet" href="css/normalize.css">
@@ -19,23 +19,23 @@
   <div class="main-wrapper">
     <section class="color-palette animated pulse">
       <div class="color color-one">
-        <img class="lock unlocked" src="assets/unlocked.svg"/>
+        <img class="lock" src="assets/unlocked.svg"/>
         <h3 class="hex-code">#A0D468</h3>
       </div>
       <div class="color color-two">
-        <img class="lock unlocked" src="assets/unlocked.svg"/>
+        <img class="lock" src="assets/unlocked.svg"/>
         <h3 class="hex-code">#48CFAD</h3>
       </div>
       <div class="color color-three">
-        <img class="lock unlocked" src="assets/unlocked.svg"/>
+        <img class="lock" src="assets/unlocked.svg"/>
         <h3 class="hex-code">#4FC2E9</h3>
       </div>
       <div class="color color-four">
-        <img class="lock unlocked" src="assets/unlocked.svg"/>
+        <img class="lock" src="assets/unlocked.svg"/>
         <h3 class="hex-code">#5D9CEC</h3>
       </div>
       <div class="color color-five">
-        <img class="lock unlocked" src="assets/unlocked.svg"/>
+        <img class="lock" src="assets/unlocked.svg"/>
         <h3 class="hex-code">#AC92EB</h3>
       </div>
     </section>
@@ -44,16 +44,18 @@
     </div>
   </div>
   <section class="palette-creator">
-    <form>
-      <select>
+    <form class="palette-form">
+      <select class="palette-dropdown">
         <option value="untitled">untitled project</option>
         <!-- more projects will be added -->
       </select>
-      <input type="text"/>
-      <input type="submit" value="Save Palette">
+      <div class ="input-wrapper">
+        <input class="palette-name" placeholder="palette name" type="text"/>
+        <button class="button palette-btn">Save Palette</button>
+      </div>
     </form>
   </section>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/scripts.js"></script>
 </body>
 
