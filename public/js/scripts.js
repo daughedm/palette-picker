@@ -30,4 +30,28 @@ $(document).ready(function () {
   });
 });
 
+// async function savePalette() {
+//   const projectName = $(this).parent('div').find(':selected').text()
+//   const rawProjects = await fetch('/api/v1/projects')
+//   const projects = await rawProjects.json()
+
+//   const name = $(this).parent('div').children('input').val()
+//   const colors = colorStore.map(color => color.randomColor)
+//   const project_id = projects.find(project => project.name === projectName).id
+
+//   fetch('/api/v1/palettes', {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       name,
+//       colors,
+//       project_id
+//     }),
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//   })
+// }
+
+
 $('.generate-btn').on('click', updatePalette);
+$('.palette-btn').on('click', savePalette)
