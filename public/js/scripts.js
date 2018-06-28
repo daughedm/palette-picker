@@ -6,9 +6,11 @@ const updatePalette = () => {
   const palette = [$('.color-one'), $('.color-two'), $('.color-three'), $('.color-four'), $('.color-five')];
   
   palette.forEach(swatch => {
-    const swatchColor = colorGenerator();
-    swatch.css('background-color', swatchColor)
-    swatch.children('h3').text(swatchColor)
+    if (!swatch.hasClass('locked')) {
+      const swatchColor = colorGenerator();
+      swatch.css('background-color', swatchColor)
+      swatch.children('h3').text(swatchColor)
+    }
   })
 }
 
@@ -21,19 +23,21 @@ $(document).ready(function () {
   $(".lock").click(function () {
     if (toggle == 0) {
       $(this).attr("src", "assets/locked.svg");
+      $(this).parent().addClass('locked');
       toggle = 1;
     }
     else if (toggle == 1) {
       $(this).attr("src", "assets/unlocked.svg");
+      $(this).parent().removeClass('locked');
       toggle = 0;
     }
-  });
+  }); 
 });
 
 async function populateProjectDropdown() {
   const projectsData = await fetch('/api/v1/projects');
   const projects = await projectsData.json();
-  console.log(projects)
+  
   projects.forEach(project => {
     const name = project.name
 
@@ -41,7 +45,14 @@ async function populateProjectDropdown() {
   })
 }
 
+async function populateProjectsPalettes() {
+  const projectsData = await fetch('/api/v1/projects');
+  const projects = await projectsData.json();
+
+
+}
+
 
 
 $('.generate-btn').on('click', updatePalette);
-$('.palette-btn').on('click', savePalette)
+// $('.palette-btn').on('click', savePalette)
