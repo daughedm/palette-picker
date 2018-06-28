@@ -19,23 +19,23 @@
   <div class="main-wrapper">
     <section class="color-palette animated pulse">
       <div class="color color-one">
-        <img class="lock" src="assets/unlocked.svg"/>
+        <img class="lock" src="assets/unlocked.svg" alt="lock"/>
         <h3 class="hex-code">#A0D468</h3>
       </div>
       <div class="color color-two">
-        <img class="lock" src="assets/unlocked.svg"/>
+        <img class="lock" src="assets/unlocked.svg" alt="lock"/>
         <h3 class="hex-code">#48CFAD</h3>
       </div>
       <div class="color color-three">
-        <img class="lock" src="assets/unlocked.svg"/>
+        <img class="lock" src="assets/unlocked.svg" alt="lock"/>
         <h3 class="hex-code">#4FC2E9</h3>
       </div>
       <div class="color color-four">
-        <img class="lock" src="assets/unlocked.svg"/>
+        <img class="lock" src="assets/unlocked.svg" alt="lock"/>
         <h3 class="hex-code">#5D9CEC</h3>
       </div>
       <div class="color color-five">
-        <img class="lock" src="assets/unlocked.svg"/>
+        <img class="lock" src="assets/unlocked.svg" alt="lock"/>
         <h3 class="hex-code">#AC92EB</h3>
       </div>
     </section>
@@ -45,8 +45,11 @@
   </div>
   <section class="palette-creator">
     <form class="palette-form">
+      <div class="input-wrapper">
+        <h4 class="palette-headline">Create a palette</h4>
+      </div>
       <select class="palette-dropdown">
-        <option value="untitled">untitled project</option>
+        <option value="default">Select Project</option>
         <!-- more projects will be added -->
       </select>
       <div class ="input-wrapper">
@@ -55,6 +58,38 @@
       </div>
     </form>
   </section>
+  <section class="project-creator">
+    <form class="project-form">
+      <div class="input-wrapper">
+        <h4>Create a project</h4>
+        <input class="project-name" placeholder="project name" type="text" />
+        <button class="button project-btn">Save Project</button>
+      </div>
+    </form>
+  </section>
+  <section class="projects">
+    <div class="projects-wrapper">
+      <h4>Default Project</h4>
+      <div class="small-box" style="background-color: #333"></div>
+      <div class="small-box" style="background-color: #333"></div>
+      <div class="small-box" style="background-color: #333"></div>
+      <div class="small-box" style="background-color: #333"></div>
+      <div class="small-box" style="background-color: #333"></div>
+      <img class="delete" src="../assets/delete.svg" alt="delete">
+    </div>
+    <div class="projects-wrapper">
+      <h4>Default Project</h4>
+      <div class="small-box" style="background-color: #333"></div>
+      <div class="small-box" style="background-color: #333"></div>
+      <div class="small-box" style="background-color: #333"></div>
+      <div class="small-box" style="background-color: #333"></div>
+      <div class="small-box" style="background-color: #333"></div>
+      <img class="delete" src="../assets/delete.svg" alt="delete">
+    </div>
+
+  </section>
+  
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/scripts.js"></script>
 </body>

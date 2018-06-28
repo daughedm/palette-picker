@@ -1,9 +1,9 @@
-const express = require('express') //imports express
-const app = express() //creates an instance of express
-const bodyParser = require('body-parser') //not sure yet
-const environment = process.env.NODE_ENV || 'development' //not sure
-const configuration = require('./knexfile')[environment] //grabs correct knexfile
-const database = require('knex')(configuration)
+const express = require('express'); 
+const app = express();
+const bodyParser = require('body-parser');
+const environment = process.env.NODE_ENV || 'development';
+const configuration = require('./knexfile')[environment];
+const database = require('knex')(configuration);
 
 const useHttps = (request, response, next) => {
   if (request.headers['x-forwarded-proto'] !== 'https') {
@@ -92,6 +92,18 @@ app.post('/api/v1/palettes', (request, response) => {
     .then(palettes => response.status(201).json({ id: palettes[0] }))
     .catch(error => response.status(500).json({ error }));
 });
+
+
+//Delete
+app.delete('/api/v1/palettes/:id', (request, response) => {
+  const { id } = request.params;
+
+  return database('palettes').where('id', id).del()
+    .then(palettes => response.sendStatus(204))  
+    .catch(error => response.status(500).json({ error }));
+});
+
+
 
 
 app.listen(app.get('port'), () => {

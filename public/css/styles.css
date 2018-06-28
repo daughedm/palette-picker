@@ -6,11 +6,19 @@ body {
   background-image: url(../assets/background.png)
 }
 
+h4 {
+  color: #AC92EB;
+  margin: 0 0 15px 0;
+}
+
 .main-wrapper {
   width: 80%;
   margin: auto;
   padding-top: 140px;
-  
+}
+
+.projects-wrapper {
+    display: inline-block;
 }
 
 .header-wrapper {
@@ -26,6 +34,10 @@ body {
 .color-palette {
   display: flex;
   justify-content: space-between;
+}
+
+.palette-headline {
+  margin: 30px 0 15px 0;
 }
 
 .color {
@@ -110,8 +122,27 @@ body {
   background-color: white;
   border-bottom: 1.5px solid rgb(236, 236, 236);
   border-top: 1.5px solid rgb(236, 236, 236);
-  height: 180px;
+  height: 210px;
   width: 100%;
+}
+
+.project-creator {
+  background-color: white;
+  border-bottom: 1.5px solid rgb(236, 236, 236);
+  height: 140px;
+  width: 100%;
+  padding-top: 30px;
+}
+
+.delete {
+  height: 30px;
+  margin: 0 30px 0 10px;
+}
+
+.small-box {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
 }
 
 .palette-name {
@@ -120,7 +151,18 @@ body {
   width: 65%;
 }
 
+.project-name {
+  height: 40px;
+  padding: 0 0 0 10px;
+  width: 65%;
+}
+
 .palette-btn {
+  width: 34%;
+  float: right;
+}
+
+.project-btn {
   width: 34%;
   float: right;
 }
@@ -133,11 +175,15 @@ body {
   padding: 0 15px;
   display: block;
   width: 50%;
-  margin: 30px auto;
+  margin: 0 auto 30px auto;
   cursor: pointer;
 }
 
 .palette-form {
+  margin: auto;
+  width: 80%;
+}
+.project-form {
   margin: auto;
   width: 80%;
 }
@@ -159,4 +205,10 @@ body {
   width: 30px;
   margin: 10px 0 0 10px;
   cursor: pointer;
+}
+
+.projects {
+  padding: 30px 0;
+  width: 80%;
+  margin: auto;
 }
