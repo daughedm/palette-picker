@@ -41,22 +41,22 @@ async function populateProjectDropdown() {
   
   projects.forEach(project => {
     const name = project.name
+    const id = project.id
 
-    $('#project-dropdown').append(`<option value=${name}>${name}</option>`)
+    $('#project-dropdown').append(`<option value=${id}>${name}</option>`)
   })
 }
 
 const populateProjectsPalettes = async () => {
   const projectsData = await fetch('/api/v1/projects');
   const allProjects = await projectsData.json();
-console.log('***', allProjects)
   
   allProjects.forEach(async project => {
     const { name, id } = project;
     const paletteData = await fetch(`/api/v1/projects/${id}/palettes`);
     const allPalettes = await paletteData.json();
 
-    const projectsAndPalettes = allPalettes.map(palette => {
+    const projectPalettes = allPalettes.map(palette => {
       const { id, colorOne, colorTwo, colorThree, colorFour, colorFive, name } = palette;
       return `
         <div class="${id} projects-wrapper">
@@ -69,12 +69,73 @@ console.log('***', allProjects)
           <img class="delete" src="../assets/delete.svg" alt="delete">
         </div>`;
     });
+    const projectContainer = 
+      `<div class="project-container" id=${id}>
+        <h3>${name}</h3>
+        ${projectPalettes}
+      </div>`;
 
-    $('#saved-projects').append(projectsAndPalettes);
+    $('#saved-projects').append(projectContainer);
   });
 }
 
+const saveProject = () => {
+  const projectName = $('.project-name').val();
+  fetch('/api/v1/projects', {
+    method: 'POST',
+    body: JSON.stringify({
+      "project": {"name": projectName}
+    }),
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  })
+  window.location.reload()
+};
 
+const savePalette = () => {
+  const hexOne = $('.one').text();
+  const hexTwo = $('.two').text();
+  const hexThree = $('.three').text();
+  const hexFour = $('.four').text();
+  const hexFive = $('.five').text();
+  const paletteName = $('.palette-name').val();
+  const projectId = $('.palette-dropdown option:selected').val();
+
+  fetch('/api/v1/palettes', {
+    method: 'POST',
+    body: JSON.stringify({
+      "colorOne": hexOne,
+      "colorTwo": hexTwo,
+      "colorThree": hexThree,
+      "colorFour": hexFour,
+      "colorFive": hexFive,
+      "name": paletteName,
+      "project_id": projectId
+    }),
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  });
+  window.location.reload()
+};
+
+const deletePalette = async (event) => {
+  const id = event.target.closest('.projects-wrapper').id;
+  debugger;
+  if (event.target.className === 'delete') {
+    event.target.closest('.projects-wrapper').remove();
+
+    fetch(`/api/v1/palettes/${id}`, {
+      method: 'DELETE',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+}
 
 $('.generate-btn').on('click', updatePalette);
-// $('.palette-btn').on('click', savePalette)
+$('.project-btn').on('click', saveProject);
+$('.palette-btn').on('click', savePalette);
+$(document).on('click', 'img.delete', deletePalette);
