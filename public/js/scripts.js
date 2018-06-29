@@ -69,13 +69,13 @@ const populateProjectsPalettes = async () => {
           <img class="delete" src="../assets/delete.svg" alt="delete">
         </div>`;
     });
-    const projectCard = `
-      <div id=${id}>
+    const projectContainer = 
+      `<div class="project-container" id=${id}>
         <h3>${name}</h3>
         ${projectPalettes}
       </div>`;
 
-    $('#saved-projects').append(projectCard);
+    $('#saved-projects').append(projectContainer);
   });
 }
 
@@ -120,6 +120,22 @@ const savePalette = () => {
   window.location.reload()
 };
 
+const deletePalette = async (event) => {
+  const id = event.target.closest('.projects-wrapper').id;
+  debugger;
+  if (event.target.className === 'delete') {
+    event.target.closest('.projects-wrapper').remove();
+
+    fetch(`/api/v1/palettes/${id}`, {
+      method: 'DELETE',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+}
+
 $('.generate-btn').on('click', updatePalette);
 $('.project-btn').on('click', saveProject);
 $('.palette-btn').on('click', savePalette);
+$(document).on('click', 'img.delete', deletePalette);
