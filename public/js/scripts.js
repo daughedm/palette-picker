@@ -59,7 +59,7 @@ const populateProjectsPalettes = async () => {
     const projectPalettes = allPalettes.map(palette => {
       const { id, colorOne, colorTwo, colorThree, colorFour, colorFive, name } = palette;
       return `
-        <div class="${id} projects-wrapper">
+        <div class="${id} projects-wrapper" id=${id}>
           <h4>${name}</h4>
           <div class="small-box" style="background-color: ${colorOne}"></div>
           <div class="small-box" style="background-color: ${colorTwo}"></div>
@@ -122,11 +122,10 @@ const savePalette = () => {
 
 const deletePalette = async (event) => {
   const id = event.target.closest('.projects-wrapper').id;
-  debugger;
   if (event.target.className === 'delete') {
     event.target.closest('.projects-wrapper').remove();
-
-    fetch(`/api/v1/palettes/${id}`, {
+    console.log('#####',id)
+    await fetch(`/api/v1/palettes/${id}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json'
