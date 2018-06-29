@@ -41,15 +41,15 @@ async function populateProjectDropdown() {
   
   projects.forEach(project => {
     const name = project.name
+    const id = project.id
 
-    $('#project-dropdown').append(`<option value=${name}>${name}</option>`)
+    $('#project-dropdown').append(`<option value=${id}>${name}</option>`)
   })
 }
 
 const populateProjectsPalettes = async () => {
   const projectsData = await fetch('/api/v1/projects');
   const allProjects = await projectsData.json();
-console.log('***', allProjects)
   
   allProjects.forEach(async project => {
     const { name, id } = project;
@@ -94,18 +94,24 @@ const saveProject = () => {
 };
 
 const savePalette = () => {
-  const palette = $('.color');
-  const name = $('.palette-name').val();
-  const project_id = $('.drop-down option:selected').val();
-  const colors = Object.keys(palette)
-    .map(color => palette[color].textContent)
-    .filter(color => color !== undefined);
+  const hexOne = $('.one').text();
+  const hexTwo = $('.two').text();
+  const hexThree = $('.three').text();
+  const hexFour = $('.four').text();
+  const hexFive = $('.five').text();
+  const paletteName = $('.palette-name').val();
+  const projectId = $('.palette-dropdown option:selected').val();
+
   fetch('/api/v1/palettes', {
     method: 'POST',
     body: JSON.stringify({
-      palettes: colors,
-      name,
-      project_id
+      "colorOne": hexOne,
+      "colorTwo": hexTwo,
+      "colorThree": hexThree,
+      "colorFour": hexFour,
+      "colorFive": hexFive,
+      "name": paletteName,
+      "project_id": projectId
     }),
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -116,3 +122,4 @@ const savePalette = () => {
 
 $('.generate-btn').on('click', updatePalette);
 $('.project-btn').on('click', saveProject);
+$('.palette-btn').on('click', savePalette);
