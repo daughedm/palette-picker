@@ -1,5 +1,6 @@
 window.onload = () => {
   populateProjectDropdown();
+  populateProjectsPalettes();
 }
 
 const updatePalette = () => {
@@ -45,11 +46,32 @@ async function populateProjectDropdown() {
   })
 }
 
-async function populateProjectsPalettes() {
+const populateProjectsPalettes = async () => {
   const projectsData = await fetch('/api/v1/projects');
-  const projects = await projectsData.json();
+  const allProjects = await projectsData.json();
+console.log('***', allProjects)
+  
+  allProjects.forEach(async project => {
+    const { name, id } = project;
+    const paletteData = await fetch(`/api/v1/projects/${id}/palettes`);
+    const allPalettes = await paletteData.json();
 
+    const projectsAndPalettes = allPalettes.map(palette => {
+      const { id, colorOne, colorTwo, colorThree, colorFour, colorFive, name } = palette;
+      return `
+        <div class="${id} projects-wrapper">
+          <h4>${name}</h4>
+          <div class="small-box" style="background-color: ${colorOne}"></div>
+          <div class="small-box" style="background-color: ${colorTwo}"></div>
+          <div class="small-box" style="background-color: ${colorThree}"></div>
+          <div class="small-box" style="background-color: ${colorFour}"></div>
+          <div class="small-box" style="background-color: ${colorFive}"></div>
+          <img class="delete" src="../assets/delete.svg" alt="delete">
+        </div>`;
+    });
 
+    $('#saved-projects').append(projectsAndPalettes);
+  });
 }
 
 
