@@ -56,7 +56,7 @@ console.log('***', allProjects)
     const paletteData = await fetch(`/api/v1/projects/${id}/palettes`);
     const allPalettes = await paletteData.json();
 
-    const projectsAndPalettes = allPalettes.map(palette => {
+    const projectPalettes = allPalettes.map(palette => {
       const { id, colorOne, colorTwo, colorThree, colorFour, colorFive, name } = palette;
       return `
         <div class="${id} projects-wrapper">
@@ -69,12 +69,50 @@ console.log('***', allProjects)
           <img class="delete" src="../assets/delete.svg" alt="delete">
         </div>`;
     });
+    const projectCard = `
+      <div id=${id}>
+        <h3>${name}</h3>
+        ${projectPalettes}
+      </div>`;
 
-    $('#saved-projects').append(projectsAndPalettes);
+    $('#saved-projects').append(projectCard);
   });
 }
 
+const saveProject = () => {
+  const projectName = $('.project-name').val();
+  fetch('/api/v1/projects', {
+    method: 'POST',
+    body: JSON.stringify({
+      "project": {"name": projectName}
+    }),
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  })
+  window.location.reload()
+};
 
+const savePalette = () => {
+  const palette = $('.color');
+  const name = $('.palette-name').val();
+  const project_id = $('.drop-down option:selected').val();
+  const colors = Object.keys(palette)
+    .map(color => palette[color].textContent)
+    .filter(color => color !== undefined);
+  fetch('/api/v1/palettes', {
+    method: 'POST',
+    body: JSON.stringify({
+      palettes: colors,
+      name,
+      project_id
+    }),
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  });
+  window.location.reload()
+};
 
 $('.generate-btn').on('click', updatePalette);
-// $('.palette-btn').on('click', savePalette)
+$('.project-btn').on('click', saveProject);
