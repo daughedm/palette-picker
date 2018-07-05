@@ -1,10 +1,15 @@
 language: node_js
 node_js:
-  - "iojs"
-  - "9"
+- iojs
+- '9'
 services:
-  - postgresql
+- postgresql
 before_script:
-  - psql -c 'create database palette_test;' -U postgres
+- psql -c 'create database palette_test;' -U postgres
 notifications:
   email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: fqmnUGGvM/A0G2Sk3xlJqtzJ/H3LSGvOWK8AY88GwxpGPGnD+u5x+RmI1DqSkUzn/GuzgEdyB/gdVkhGyroorWOsgH6z0ZB0qKIy+xMSW5fkWSwH/2gzeE/lR/0Fl2oJhcSOEe7y6Hu1HBd4qEVdcsgqtQdO2WzhN9iqdGHDb9PR0p0oZAGNP8EmTrIJMC9O1SAhllVfgcQlOkJn3nn8HdfcbfuhLfmnjzGS9pOfelSOJWXYHFdVgWXHlNNnq+dZ6V/3xNqb1crblreT6mTkUScXg2hhl+e67yDH27aGTu4S5BeNodMwCwewZhHoMadluuO7vr8pXW1JpQbvFRk1jmp3wNZfKy3FJd0yAzqGndmbGrkC+kOpKfwx3qYQhLx21R2fIfOr9Gn4IRPCneehvL3glZlIrH8nXTJHV5yH7/t9tmr8HQwqG9CxP/Y1ScN5gAhGbFeoNcWdB4ZDYjJjUpRmUxzkGjZPwfmVhg3rcKltCDSJHD4vcXLIOr+X0C2zAYtFUIwNSYy6lSLEn0F3ZkHjJw6LUHJqPPQEz02UsKAeqCGyDFE6VPMDMLc/JKGDIRaCv1BdKDV3/0EeGhFiHuaNfeL6sQjslvCYrZ/37jrMNeg/uFs6cEKd95TvMWZCJZeDZ6OkCk1V2XIE8x3JjF1GAF90+29BvyHOrMTT0j8=
+  app: 
