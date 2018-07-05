@@ -2,3 +2,9 @@ language: node_js
 node_js:
   - "iojs"
   - "9"
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database palette_test;' -U postgres
+notifications:
+  email: false
